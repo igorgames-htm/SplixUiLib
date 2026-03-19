@@ -160,7 +160,7 @@ function library:new(props)
 	syn.protect_gui(screen)
         end
 	-- 1
-	if not isMobile then
+	if isMobile then
 	local close_and_open_button = utility.new(
 			"TextButton",
 			{
