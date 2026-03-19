@@ -27,6 +27,7 @@ local ts = game:GetService("TweenService")
 local uis = game:GetService("UserInputService") 
 local hs = game:GetService("HttpService")
 local ws = game:GetService("Workspace")
+local vim = game:GetService("VirtualInputManager")
 local UserInputService = game:GetService("UserInputService")
 local isMobile = UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled
 local plr = plrs.LocalPlayer
@@ -139,6 +140,7 @@ function library:new(props)
 	local font = props.font or props.Font or "RobotoMono"
 	local name = props.name or props.Name or props.UiName or props.Uiname or props.uiName or props.username or props.Username or props.UserName or props.userName or "new ui"
 	local color = props.color or props.Color or props.mainColor or props.maincolor or props.MainColor or props.Maincolor or props.Accent or props.accent or Color3.fromRGB(225, 58, 81)
+	local buttonname = props.mobile or props.Mobile or "SplixUi"
 	-- // variables
 	local window = {}
 	-- // main
@@ -146,17 +148,42 @@ function library:new(props)
 		"ScreenGui",
 		{
 			Name = tostring(math.random(0,999999))..tostring(math.random(0,999999)),
-			DisplayOrder = 9999,
+			DisplayOrder = 100,
 			ResetOnSpawn = false,
 			ZIndexBehavior = "Global",
 			Parent = game:GetService("CoreGui")
 		}
 	)
+	
 	--
         if (check_exploit == "Synapse" and syn.request) then
 	syn.protect_gui(screen)
         end
 	-- 1
+	local close_and_open_button = utility.new(
+			"TextButton",
+			{
+				AnchorPoint = Vector2.new(0.5,0.5),
+				BackgroundTransparency = 0.5,
+				BackgroundColor3 = color,
+				Size = UDim2.new(0.5,0,0,30),
+				Position = UDim2.new(0,20,0,20),
+				Text = name,
+				TextColor3 = Color3.fromRGB(255,255,255),
+				TextSize = 12,
+				TextStrokeTransparency = 0,
+				Font = font,
+				ZIndex = 99999,
+				Parent = screen
+			}
+		)
+	close_and_open_button.MouseButton1Click:Connect(function()
+    	if isMobile then
+			vim:SendKeyEvent(true, Enum.KeyCode.RightShift, false, game)
+			task.wait()
+			vim:SendKeyEvent(false, Enum.KeyCode.RightShift, false, game)
+		end
+	end)
 	local outline = utility.new(
 		"Frame",
 		{
