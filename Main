@@ -179,9 +179,9 @@ function library:new(props)
 			}
 		)
 	close_and_open_button.MouseButton1Click:Connect(function()
-    	vim:SendKeyEvent(true, Enum.KeyCode.RightShift, false, game)
+    	vim:SendKeyEvent(true, typeof(window.key) == "string" and Enum.KeyCode[window.key] or window.key, false, game)
 		task.wait()
-		vim:SendKeyEvent(false, Enum.KeyCode.RightShift, false, game)
+		vim:SendKeyEvent(false, typeof(window.key) == "string" and Enum.KeyCode[window.key] or window.key, false, game)
 	end)
 	end
 	local outline = utility.new(
@@ -365,6 +365,7 @@ function library:new(props)
 		["multiboxes"] = {},
 		["buttonboxs"] = {},
 		["colorpickers"] = {},
+		["anim"] = true,
 		["x"] = true,
 		["y"] = true,
 		["key"] = Enum.KeyCode.RightShift,
