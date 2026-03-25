@@ -142,7 +142,7 @@ function library:new(props)
 	local color = props.color or props.Color or props.mainColor or props.maincolor or props.MainColor or props.Maincolor or props.Accent or props.accent or Color3.fromRGB(225, 58, 81)
 	local buttonname = props.mobile or props.Mobile or "SplixuiPlus"
 	-- // variables
-	local window = {}
+	local window = {["size"] = Vector2.new(600,590)}
 	-- // main
 	local screen = utility.new(
 		"ScreenGui",
@@ -191,7 +191,7 @@ function library:new(props)
 			BackgroundColor3 = color,
 			BorderColor3 = Color3.fromRGB(12, 12, 12),
 			BorderSizePixel = 1,
-			Size = UDim2.new(0,(isMobile and 300 or 600),0,(isMobile and 295 or 590)),
+			Size = UDim2.new(0,(isMobile and window.size.X/2 or window.size.X),0,(isMobile and window.size.Y/2 or window.size.Y)),
 			Position = UDim2.new(0.5,0,0.5,0),
 			Parent = screen
 		}
@@ -365,7 +365,7 @@ function library:new(props)
 		["multiboxes"] = {},
 		["buttonboxs"] = {},
 		["colorpickers"] = {},
-		["anim"] = true,
+		["size"] = Vector2.new(600,590),
 		["x"] = true,
 		["y"] = true,
 		["key"] = Enum.KeyCode.RightShift,
@@ -390,6 +390,7 @@ function library:new(props)
 	local saved = UDim2.new(0,0,0,0)
 	--
 	uis.InputBegan:Connect(function(Input)
+	  outline.Size = UDim2.new(0,(isMobile and window.size.X/2 or window.size.X),0,(isMobile and window.size.Y/2 or window.size.Y))
 		if Input.UserInputType == Enum.UserInputType.Keyboard then
 			if Input.KeyCode == window.key then
 				if cooldown == false then
@@ -2267,6 +2268,8 @@ function sections:dropdown(props)
 		["open"] = false,
 		["titles"] = {},
 		["current"] = def,
+		["optionsoutline"] = optionsoutline,
+		["ddoptionbutton"] = ddoptionbutton,
 		["callback"] = callback
 	}
 	--
@@ -2617,6 +2620,70 @@ function dropdowns:set(value)
 					x.TextColor3 = Color3.fromRGB(255,255,255)
 				end
 			end
+		end
+	end
+end
+function dropdowns:update(value)
+	if value ~= nil then
+		local dropdown = self
+		if typeof(value) == "table" then
+			self.options = value
+			dropdown.optionsoutline:ClearAllChildren()
+			dropdown.ddoptionbutton:ClearAllChildren()
+			for i,v in pairs(options) do
+		local ddoptionbutton = utility.new(
+			"TextButton",
+			{
+				AnchorPoint = Vector2.new(0,0),
+				BackgroundTransparency = 1,
+				Size = UDim2.new(1,0,0,18),
+				Text = "",
+				ZIndex = 6,
+				Parent = dropdown.optionsoutline
+			}
+		)
+		--
+		local ddoptiontitle = utility.new(
+			"TextLabel",
+			{
+				AnchorPoint = Vector2.new(0.5,0),
+				BackgroundTransparency = 1,
+				Size = UDim2.new(1,-10,1,0),
+				Position = UDim2.new(0.5,0,0,0),
+				Font = self.library.font,
+				Text = v,
+				TextColor3 = Color3.fromRGB(255,255,255),
+				TextSize = self.library.textsize,
+				TextStrokeTransparency = 0,
+				TextXAlignment = "Left",
+				ClipsDescendants = true,
+				ZIndex = 6,
+				Parent = dropdown.ddoptionbutton
+			}
+		)
+		--
+		self.library.labels[#self.library.labels+1] = ddoptiontitle
+		--
+		table.insert(dropdown.titles,ddoptiontitle)
+		--
+		if v == dropdown.current then ddoptiontitle.TextColor3 = self.library.theme.accent end
+		--
+		ddoptionbutton.MouseButton1Down:Connect(function()
+			optionsholder.Visible = false
+			dropdown.open = false
+			indicator.Text = "+"
+			for z,x in pairs(dropdown.titles) do
+				if x.TextColor3 == self.library.theme.accent then
+					x.TextColor3 = Color3.fromRGB(255,255,255)
+				end
+			end
+			dropdown.current = v
+			dropdown.value.Text = v
+			ddoptiontitle.TextColor3 = self.library.theme.accent
+			table.insert(self.library.themeitems["accent"]["TextColor3"],ddoptiontitle)
+			dropdown.callback(v)
+		end)
+	end
 		end
 	end
 end
