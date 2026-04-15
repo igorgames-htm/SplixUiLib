@@ -136,7 +136,7 @@ end
 -- // main
 function library:new(props)
 	-- // properties
-	local textsize = (props.textsize or props.TextSize or props.textSize or props.Textsize or 12) / (isMobile and 2 or 1)
+	local textsize = (props.textsize or props.TextSize or props.textSize or props.Textsize or 12) / (isMobile and 1.25 or 1)
 	local font = props.font or props.Font or "RobotoMono"
 	local name = props.name or props.Name or props.UiName or props.Uiname or props.uiName or props.username or props.Username or props.UserName or props.userName or "new ui"
 	local color = props.color or props.Color or props.mainColor or props.maincolor or props.MainColor or props.Maincolor or props.Accent or props.accent or Color3.fromRGB(225, 58, 81)
@@ -161,6 +161,17 @@ function library:new(props)
         end
 	-- 1
 	if isMobile then
+local screen2 = utility.new(
+		"ScreenGui",
+		{
+			Name = tostring(math.random(0,999999))..tostring(math.random(0,999999)),
+			DisplayOrder = 100,
+			ResetOnSpawn = false,
+			IgnoreGuiInset = true
+			ZIndexBehavior = "Global",
+			Parent = game:GetService("CoreGui")
+		}
+	)
 	local close_and_open_button = utility.new(
 			"TextButton",
 			{
@@ -175,7 +186,7 @@ function library:new(props)
 				TextStrokeTransparency = 0,
 				Font = font,
 				ZIndex = 99999,
-				Parent = screen
+				Parent = screen2
 			}
 		)
 	close_and_open_button.MouseButton1Click:Connect(function()
