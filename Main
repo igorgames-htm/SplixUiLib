@@ -167,7 +167,7 @@ local screen2 = utility.new(
 			Name = tostring(math.random(0,999999))..tostring(math.random(0,999999)),
 			DisplayOrder = 100,
 			ResetOnSpawn = false,
-			IgnoreGuiInset = true
+			IgnoreGuiInset = true,
 			ZIndexBehavior = "Global",
 			Parent = game:GetService("CoreGui")
 		}
