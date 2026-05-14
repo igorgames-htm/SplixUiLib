@@ -815,7 +815,9 @@ function library:settheme(theme,color)
 	end
 	--
 	if window.themeitems[theme] then
-		window.mobilescreen.TextButton.BackgroundColor3 = color
+        if window.mobilescreen then
+		    window.mobilescreen.TextButton.BackgroundColor3 = color
+        end
 		for i,v in pairs(window.themeitems[theme]) do
 			for z,x in pairs(v) do
 				x[i] = color
@@ -3065,6 +3067,7 @@ function sections:textbox(props)
 			PlaceholderText = placeholder,
 			Text = def,
 			TextColor3 = Color3.fromRGB(255,255,255),
+            ClearTextOnFocus = false,
 			TextSize = self.library.textsize,
 			TextStrokeTransparency = 0,
 			TextTruncate = "AtEnd",
@@ -4460,6 +4463,7 @@ function sections:configloader(props)
 				Text = "",
 				TextColor3 = Color3.fromRGB(255,255,255),
 				TextSize = self.library.textsize,
+                ClearTextOnFocus = false,
 				TextStrokeTransparency = 0,
 				Font = self.library.font,
 				ZIndex = 5,
