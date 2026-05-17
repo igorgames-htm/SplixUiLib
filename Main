@@ -230,7 +230,7 @@ screen2 = utility.new(
 		"UIListLayout",
 		{
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
-			Padding = UDim.new(0,2),
+			Padding = UDim.new(0,3),
 			Parent = notifications
 		}
 	)
@@ -396,7 +396,7 @@ screen2 = utility.new(
 		["mobilescreen"] = screen2,
 		["labels"] = {},
 		["tabs"] = outline4,
-		["notifications"] = screen3,
+		["notifications"] = notifications,
 		["notificationY"] = 0,
 		["tabsbuttons"] = tabsbuttons,
 		["outline"] = outline,
@@ -443,22 +443,26 @@ screen2 = utility.new(
 	return window
 end
 --
-function library:notification(props)
-	local parent = self.notifications.Frame
+function library:notification(props,own)
+	if own then
+		self = own
+	end
+
+	local parent = self.notifications
 
 	local text = props.Text or props.text or "new ui"
 	local timeout = props.Time or props.time or 2
 
 	local h, s, v = self.theme.accent:ToHSV()
 
-	local newColor = Color3.fromHSV(h, s, v-0.25)
+	local newColor = Color3.fromHSV(h, s, v-0.3)
 
 	local frame = utility.new(
 		"Frame",
 		{
 			BackgroundTransparency = 0.5,
 			BackgroundColor3 = newColor,
-			BorderSizePixel = 0,
+			BorderSizePixel = 0,				
 			Size = UDim2.new(0,5,0,30),
 			Parent = parent
 		}
@@ -468,6 +472,7 @@ function library:notification(props)
 		{
 			AnchorPoint = Vector2.new(0, 1),
 			Position = UDim2.new(0,0,1,0),
+			BorderMode = Enum.BorderMode.Inset,
 			BackgroundColor3 = self.theme.accent,
 			Size = UDim2.new(1,0,0,3),
 			Parent = frame
