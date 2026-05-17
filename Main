@@ -474,7 +474,7 @@ function library:notification(props,own)
 			Position = UDim2.new(0,0,1,0),
 			BorderMode = Enum.BorderMode.Inset,
 			BackgroundColor3 = self.theme.accent,
-			Size = UDim2.new(1,0,0,3),
+			Size = UDim2.new(1,0,0,4),
 			Parent = frame
 		}
 	)
@@ -484,7 +484,7 @@ function library:notification(props,own)
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			Position = UDim2.new(0,4,0,0),
-			Size = UDim2.new(1,-4,1,-3),
+			Size = UDim2.new(1,-4,1,-4),
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextStrokeTransparency = 0,
 			TextColor3 = Color3.new(1,1,1),
