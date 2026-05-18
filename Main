@@ -396,6 +396,7 @@ screen2 = utility.new(
 		["holder"] = holder,
 		["mobilescreen"] = screen2,
 		["labels"] = {},
+		["notifications"] = notifications,
 		["tabs"] = outline4,
 		["tabsbuttons"] = tabsbuttons,
 		["outline"] = outline,
