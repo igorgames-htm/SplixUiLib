@@ -2281,7 +2281,7 @@ function sections:dropdown(props)
 			Position = isMobile and UDim2.new(0,0,0,20) or UDim2.new(0,0,0,34),
 			Visible = false,
 			ZIndex = 999,
-			Parent = window.screen
+			Parent = self.library.screen
 		}
 	)
 	--
@@ -2546,7 +2546,7 @@ function sections:buttonbox(props)
 			Position = isMobile and UDim2.new(0,0,0,20) or UDim2.new(0,0,0,34),
 			Visible = false,
 			ZIndex = 9999,
-			Parent = window.screen
+			Parent = self.library.screen
 		}
 	)
 	--
@@ -2840,7 +2840,7 @@ function sections:multibox(props)
 			Position = UDim2.new(0,0,0,34),
 			Visible = false,
 			ZIndex = 9999,
-			Parent = window.screen
+			Parent = self.library.screen
 		}
 	)
 	--
