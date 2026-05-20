@@ -2399,6 +2399,36 @@ function sections:dropdown(props)
 				v.TextColor3 = Color3.fromRGB(255,255,255)
 			end
 		end
+		local absPos = outline.AbsolutePosition
+	local absSize = outline.AbsoluteSize
+
+	local visibleCount = math.clamp(#options,1,max)
+	local optionHeight = isMobile and 16 or 18
+
+	optionsholder.Position = UDim2.fromOffset(
+		absPos.X,
+		absPos.Y + absSize.Y + 1
+	)
+
+	optionsholder.Size = UDim2.fromOffset(
+		absSize.X,
+		(visibleCount * optionHeight) + 2
+	)
+
+	optionsoutline.Size = UDim2.new(
+		1,
+		0,
+		0,
+		visibleCount * optionHeight
+	)
+
+	optionsoutline.CanvasSize = UDim2.new(
+		0,
+		0,
+		0,
+		#options * optionHeight
+	)
+
 		optionsholder.Visible = not dropdown.open
 		dropdown.open = not dropdown.open
 		if dropdown.open then
@@ -2644,6 +2674,35 @@ function sections:buttonbox(props)
 	--
 	buttonboxbutton.MouseButton1Down:Connect(function()
 		buttonbox.library:closewindows(buttonbox)
+		local absPos = outline.AbsolutePosition
+	local absSize = outline.AbsoluteSize
+
+	local visibleCount = math.clamp(#options,1,max)
+	local optionHeight = isMobile and 16 or 18
+
+	optionsholder.Position = UDim2.fromOffset(
+		absPos.X,
+		absPos.Y + absSize.Y + 1
+	)
+
+	optionsholder.Size = UDim2.fromOffset(
+		absSize.X,
+		(visibleCount * optionHeight) + 2
+	)
+
+	optionsoutline.Size = UDim2.new(
+		1,
+		0,
+		0,
+		visibleCount * optionHeight
+	)
+
+	optionsoutline.CanvasSize = UDim2.new(
+		0,
+		0,
+		0,
+		#options * optionHeight
+	)
 		optionsholder.Visible = not buttonbox.open
 		buttonbox.open = not buttonbox.open
 		if buttonbox.open then
@@ -2981,6 +3040,35 @@ function sections:multibox(props)
 				v.TextColor3 = self.library.theme.accent
 			end
 		end
+		local absPos = outline.AbsolutePosition
+	local absSize = outline.AbsoluteSize
+
+	local visibleCount = math.clamp(#options,1,max)
+	local optionHeight = 18
+
+	optionsholder.Position = UDim2.fromOffset(
+		absPos.X,
+		absPos.Y + absSize.Y + 1
+	)
+
+	optionsholder.Size = UDim2.fromOffset(
+		absSize.X,
+		(visibleCount * optionHeight) + 2
+	)
+
+	optionsoutline.Size = UDim2.new(
+		1,
+		0,
+		0,
+		visibleCount * optionHeight
+	)
+
+	optionsoutline.CanvasSize = UDim2.new(
+		0,
+		0,
+		0,
+		#options * optionHeight
+	)
 		optionsholder.Visible = not multibox.open
 		multibox.open = not multibox.open
 		if multibox.open then
