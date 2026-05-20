@@ -2280,6 +2280,7 @@ function sections:dropdown(props)
 			Size = isMobile and UDim2.new(1,0,0,17) or UDim2.new(1,0,0,20),
 			Position = isMobile and UDim2.new(0,0,0,20) or UDim2.new(0,0,0,34),
 			Visible = false,
+			ZIndex = 999,
 			Parent = dropdownholder
 		}
 	)
@@ -2544,6 +2545,7 @@ function sections:buttonbox(props)
 			Size = isMobile and UDim2.new(1,0,0,17) or UDim2.new(1,0,0,20),
 			Position = isMobile and UDim2.new(0,0,0,20) or UDim2.new(0,0,0,34),
 			Visible = false,
+			ZIndex = 9999,
 			Parent = buttonboxholder
 		}
 	)
@@ -2837,6 +2839,7 @@ function sections:multibox(props)
 			Size = UDim2.new(1,0,0,20),
 			Position = UDim2.new(0,0,0,34),
 			Visible = false,
+			ZIndex = 9999,
 			Parent = multiboxholder
 		}
 	)
