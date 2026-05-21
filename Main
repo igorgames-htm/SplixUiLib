@@ -4,6 +4,7 @@ local pages = {}
 local sections = {}
 local multisections = {}
 local mssections = {}
+local customs = {}
 local toggles = {}
 local buttons = {}
 local sliders = {}
@@ -1614,6 +1615,30 @@ function multisections:section(props)
 	-- // metatable indexing + return
 	setmetatable(mssection,mssections)
 	return mssection
+end
+--
+function sections:custom(props)
+	local size = props.Size or props.size or 50
+
+	local custom = {}
+
+	local customholder = utility.new(
+		"Frame",
+		{
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,0,size),
+			Parent = self.content
+		}
+	)
+
+	custom = {
+		["library"] = self.library,
+		["holder"] = customholder,
+		["size"] = size,
+	}
+
+	setmetatable(custom, customs)
+	return custom
 end
 --
 function sections:toggle(props)
