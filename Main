@@ -3625,7 +3625,7 @@ function sections:colorpicker(props)
 			BorderSizePixel = 1,
 			Size = UDim2.new(0,30,1,0),
 			Position = UDim2.new(1,0,0,0),
-			Parent = colorpickerholder
+			Parent = self.library.screen
 		}
 	)
 	--
@@ -4066,10 +4066,26 @@ function sections:colorpicker(props)
 	end
 	--
 	button.MouseButton1Down:Connect(function()
-		self.library:closewindows(colorpicker)
-		cpholder.Visible = not colorpicker.open
-		colorpicker.open = not colorpicker.open
-	end)
+
+	self.library:closewindows(colorpicker)
+
+	local absPos = outline.AbsolutePosition
+	local absSize = outline.AbsoluteSize
+
+	cpholder.Position = UDim2.fromOffset(
+		absPos.X - 170,
+		absPos.Y + absSize.Y + 5
+	)
+
+	cpholder.Size = UDim2.fromOffset(
+		200,
+		230
+	)
+
+	cpholder.Visible = not colorpicker.open
+	colorpicker.open = not colorpicker.open
+
+end)
 	--
 	huebutton.MouseButton1Down:Connect(function()
 		colorpicker.hue = true
