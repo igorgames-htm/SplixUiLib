@@ -143,7 +143,7 @@ function library:new(props)
 	local color = props.color or props.Color or props.mainColor or props.maincolor or props.MainColor or props.Maincolor or props.Accent or props.accent or Color3.fromRGB(225, 58, 81)
 	local buttonname = props.mobile or props.Mobile or "SplixuiPlus"
 	-- // variables
-	local window = {["size"] = Vector2.new(600,590)}
+	local window = {["size"] = Vector2.new(600,650)}
 	-- // main
 	local screen = utility.new(
 		"ScreenGui",
@@ -213,7 +213,7 @@ screen2 = utility.new(
 			BackgroundColor3 = color,
 			BorderColor3 = Color3.fromRGB(12, 12, 12),
 			BorderSizePixel = 1,
-			Size = UDim2.new(0,(isMobile and window.size.X/1.65 or window.size.X),0,(isMobile and window.size.Y/1.65 or window.size.Y)),
+			Size = UDim2.new(0,(isMobile and window.size.X/1.6 or window.size.X),0,(isMobile and window.size.Y/1.6 or window.size.Y)),
 			Position = UDim2.new(0.5,0,0.5,0),
 			Parent = screen
 		}
@@ -429,7 +429,7 @@ screen2 = utility.new(
 	--
 	--
 	uis.InputBegan:Connect(function(Input)
-	  outline.Size = UDim2.new(0,(isMobile and window.size.X/1.65 or window.size.X),0,(isMobile and window.size.Y/1.65 or window.size.Y))
+	  outline.Size = UDim2.new(0,(isMobile and window.size.X/1.6 or window.size.X),0,(isMobile and window.size.Y/1.6 or window.size.Y))
 		if Input.UserInputType == Enum.UserInputType.Keyboard then
 			if Input.KeyCode == window.key then
 				screen.Enabled = not screen.Enabled
