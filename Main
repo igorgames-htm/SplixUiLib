@@ -2071,7 +2071,7 @@ function sections:slider(props)
 	end)
 	--
 	uis.InputEnded:Connect(function(Input)
-		if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and slider.holding then
+		if (Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch) and slider.holding then
 			slider.holding = false
 			outline.BorderColor3 = Color3.fromRGB(12, 12, 12)
 			local find = table.find(self.library.themeitems["accent"]["BorderColor3"],outline)
